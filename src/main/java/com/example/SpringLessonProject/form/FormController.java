@@ -1,5 +1,7 @@
 package com.example.SpringLessonProject.form;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,6 +49,14 @@ public class FormController {
 		entform.setName(form.getName1());
 		sampledao.insertDb(entform);
 		return "form/complete";
+	}
+
+	@RequestMapping("/view")
+	public String view(Model model) {
+		List<EntForm> list = sampledao.searchDb();
+		model.addAttribute("dbList",list);
+		model.addAttribute("title","一覧ページ");
+		return "form/view";
 	}
 
 }
