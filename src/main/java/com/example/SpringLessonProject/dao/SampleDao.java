@@ -48,4 +48,11 @@ public class SampleDao {
 	public void insertDb(EntForm entform) {
 		db.update("INSERT INTO sample (name) VALUES(?)",entform.getName() );
 	}
+
+  public void deleteDb(Long id) {
+		// コンソールに表示
+		System.out.println("削除しました");
+		// DBからデータを削除
+		db.update("DELETE FROM sample WHERE id=?", id);
+	}
 }

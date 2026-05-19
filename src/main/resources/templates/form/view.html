@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>Hello</title>
-<meta charset="utf-8" />
-<link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}" >
+  <title>一覧</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
 </head>
+
 <body>
-	<h1 th:text="${title}">一覧</h1>
-	<table>
-		<tr>
-			<th>id</th>
-			<th>名前</th>
-		</tr>
-		<tr th:each="res : ${dbList}">
-			<td th:text="${res.id}">1</td>
-			<td th:text="${res.name}">ダミーの名前</td>
-		</tr>
-	</table>
-	<p>
-		<a href="input.html" th:href="@{/form}">フォーム入力画面へ</a>
-	</p>
+  <h1 th:text="${title}"></h1>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>名前</th>
+      <th></th>
+    </tr>
+    <tr th:each="res : ${dbList}">
+      <td th:text="${res.id}">1</td>
+      <td th:text="${res.name}">名前</td>
+      <td>
+        <form th:action="@{/del/{id}(id=${res.id})}">
+          <input type="submit" value="削除" />
+        </form>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <a href="/form" th:href="@{/form}">フォーム入力画面へ</a>
+  </p>
 </body>
+
 </html>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.SpringLessonProject.dao.SampleDao;
@@ -57,6 +58,12 @@ public class FormController {
 		model.addAttribute("dbList",list);
 		model.addAttribute("title","一覧ページ");
 		return "form/view";
+	}
+
+	@RequestMapping("/del/{id}")
+	public String destory(@PathVariable Long id) {
+		sampledao.deleteDb(id);
+		return "redirect:/view";
 	}
 
 }
