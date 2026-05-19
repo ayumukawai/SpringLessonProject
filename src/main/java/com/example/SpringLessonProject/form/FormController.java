@@ -6,8 +6,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.SpringLessonProject.dao.SampleDao;
+import com.example.SpringLessonProject.entity.EntForm;
+
 @Controller
 public class FormController {
+
+	private final SampleDao sampledao;
+	public FormController(SampleDao sampledao) {
+		this.sampledao = sampledao;
+	}
 
 	@RequestMapping("/sample")
 	public String sample(Model model) {
@@ -31,6 +39,14 @@ public class FormController {
 
 		model.addAttribute("title","確認ページ");
 		return "form/confirm";
+	}
+
+	@RequestMapping ("/complete")
+	public String complete(Form form, Model model){
+		EntForm entform = new EntForm();
+		entform.setName(form.getName1());
+		sampledao.insertDb(entform);
+		return "form/complete";
 	}
 
 }
