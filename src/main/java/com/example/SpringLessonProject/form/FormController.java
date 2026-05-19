@@ -2,6 +2,8 @@ package com.example.SpringLessonProject.form;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -20,7 +22,13 @@ public class FormController {
 	}
 	
 	@RequestMapping("/confirm")
-	public String confirm(Model model, Form form) {
+	public String confirm(Model model, @Validated Form form, BindingResult result) {
+
+		if(result.hasErrors()) {
+			model.addAttribute("title","入力ページ");
+			return "form/input";
+		}
+
 		model.addAttribute("title","確認ページ");
 		return "form/confirm";
 	}
