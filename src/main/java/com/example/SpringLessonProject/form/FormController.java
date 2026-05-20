@@ -66,5 +66,20 @@ public class FormController {
 		return "redirect:/view";
 	}
 
+	@RequestMapping("/edit/{id}")
+	public String editView(@PathVariable Long id, Model model) {
+
+		// DBからデータを1件取ってくる(データ型はリスト)
+		List<EntForm> list = sampledao.selectOne(id);
+
+		// リスト形式のため、インデックス番号が0のオブジェクトを抽出
+		EntForm entformdb = list.get(0);
+
+		// 編集画面用のViewに、データ２つを送る
+		model.addAttribute("form", entformdb);
+		model.addAttribute("title", "編集ページ");
+		return "form/edit";
+	}
+
 }
 
