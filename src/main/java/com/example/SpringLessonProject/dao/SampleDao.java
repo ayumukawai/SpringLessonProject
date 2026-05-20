@@ -80,4 +80,12 @@ public class SampleDao {
 		return resultDb2;
 	}
 
+	public void updateDb(Long id, EntForm entform) {
+		// コンソールに表示
+		System.out.println("編集の実行");
+		// UPDATEを実行
+		db.update("UPDATE sample SET name = ? WHERE id = ?",entform.getName(), id);
+	}
+
+
 }

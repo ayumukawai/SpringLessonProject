@@ -81,5 +81,17 @@ public class FormController {
 		return "form/edit";
 	}
 
+	@RequestMapping("/edit/{id}/exe")
+	public String editExe(@PathVariable Long id, Model model, Form form) {
+		// フォームの値をエンティティに入れ直し
+		EntForm entform = new EntForm();
+		System.out.println(form.getName1());// 取得できているかの確認
+		entform.setName(form.getName1());
+		// 更新の実行
+		sampledao.updateDb(id,entform);
+		// 一覧画面へリダイレクト
+		return "redirect:/view";
+	}
+
 }
 
