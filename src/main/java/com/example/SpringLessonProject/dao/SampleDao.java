@@ -21,27 +21,20 @@ public class SampleDao {
   public List<EntForm> searchDb(){
 		String sql = "SELECT * FROM sample";
 
-		//データベースから取り出したデータをresultDB1に入れる
 		List<Map<String, Object>> resultDb1 = db.queryForList(sql);
 
-		//画面に表示しやすい形のList(resultDB2)を用意
 		List<EntForm> resultDb2 = new ArrayList<EntForm>();
 
-		//1件ずつピックアップ
 		for(Map<String,Object> result1:resultDb1) {
 
-			//データ1件分を1つのまとまりとしたEntForm型の「entformdb」を生成
 			EntForm entformdb = new EntForm();
 
-			//id、nameのデータをentformdbに移す
 			entformdb.setId((int)result1.get("id"));
 			entformdb.setName((String)result1.get("name"));
 
-			//移し替えたデータを持ったentformdbを、resultDB2に入れる
 			resultDb2.add(entformdb);
 		}
 
-		//Controllerに渡す
 		return resultDb2;
 	}
 
@@ -50,40 +43,29 @@ public class SampleDao {
 	}
 
   public void deleteDb(Long id) {
-		// コンソールに表示
 		System.out.println("削除しました");
-		// DBからデータを削除
 		db.update("DELETE FROM sample WHERE id=?", id);
 	}
 
-		public List<EntForm> selectOne(Long id) {
-		// コンソールに表示
+	public List<EntForm> selectOne(Long id) {
 		System.out.println("編集画面を出します");
 
-		// データベースから目的の1件を取り出して、そのままresultDB1に入れる
 		List<Map<String, Object>> resultDb1 = db.queryForList("SELECT * FROM sample where id=?", id);
 
-		// 画面に表示しやすい形のList(resultDB2)を用意
 		List<EntForm> resultDb2=new ArrayList<EntForm>();
 
-		// 1件ずつピックアップ
 		for(Map<String,Object> result1:resultDb1) {
-			// データ1件分を1つのまとまりとするので、EntForm型の「entformdb」を生成
 			EntForm entformdb = new EntForm();
-			// id、nameのデータをentformdbに移す
 			entformdb.setId((int)result1.get("id"));
 			entformdb.setName((String)result1.get("name"));
-			// 移し替えたデータを持ったentformdbを、resultDB2に入れる
 			resultDb2.add(entformdb);
 		}
-		// Controllerに渡す
+
 		return resultDb2;
 	}
 
 	public void updateDb(Long id, EntForm entform) {
-		// コンソールに表示
 		System.out.println("編集の実行");
-		// UPDATEを実行
 		db.update("UPDATE sample SET name = ? WHERE id = ?",entform.getName(), id);
 	}
 
